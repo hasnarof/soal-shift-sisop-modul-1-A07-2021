@@ -1,8 +1,7 @@
 #!/bin/bash
 
 (# 2. a.
-# Transaksi terakhir dengan profit percentage terbesar yaitu *ID
-# Transaksi* dengan persentase *Profit Percentage*%.
+# Transaksi terakhir dengan profit percentage terbesar 
 
 awk -F"\t" -v max=0 'NR>1{    
     if($21/($18-$21)*100>=max){
@@ -16,11 +15,13 @@ END{
 # 2. b.
 # Daftar nama customer di Albuquerque pada tahun 2017
 
-b=$(awk -F'\t' 'NR>1{ 
+echo "Daftar nama customer di Albuquerque pada tahun 2017 antara lain :"
+awk -F'\t' 'NR>1{ 
     if($10 ~ /Albuquerque/) print $7,$3,$10
-    }' Laporan-TokoShiSop.tsv | sort -u -k1 | 
-    awk '{split($0,tgl,"-"); if(tgl[3] ~ /17/) print $1,$2}')
-printf "Daftar nama customer di Albuquerque pada tahun 2017 antara lain :\n%s %s\n%s %s\n%s %s\n%s %s\n\n" $b
+    }' Laporan-TokoShiSop.tsv | uniq |
+    awk '{split($0,tgl,"-"); if(tgl[3] ~ /17/) print $1,$2}'
+
+printf "\n"
 
 # 2. c.
 # Tipe segmen customer yang penjualannya paling sedikit dan total transaksinya.
@@ -32,7 +33,8 @@ END{
     for (s in segmen) print s, segmen[s]
     }' Laporan-TokoShiSop.tsv | sort -g -k 2 | head -n 1 | 
     awk '{split($0,segmen," "); 
-    printf "Tipe segmen customer yang penjualannya paling sedikit adalah %s %s dengan %d transaksi.\n\n", segmen[1],segmen[2],segmen[3]}'
+    printf "Tipe segmen customer yang penjualannya paling sedikit adalah %s %s dengan %d transaksi.\n\n", 
+    segmen[1],segmen[2],segmen[3]}'
 
 # 2. d.
 # Wilayah bagian (region) yang memiliki total keuntungan (profit) yang
