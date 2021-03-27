@@ -1,7 +1,7 @@
 #!/bin/bash
 for ((q=1; q<=23; q++))
 do
-        for ((b=1; b<q; b=b+1))
+        for ((b; b<q; b=b+1))
         do
                 if ((q<10))
                 then
