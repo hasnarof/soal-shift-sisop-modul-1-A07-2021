@@ -7,6 +7,26 @@ Kelompok A07
 Sistem Operasi 2021
 
 ## 1. 
+1a
+https://regexone.com/
+
+1b
+https://stackoverflow.com/questions/13242469/how-to-use-sed-grep-to-extract-text-between-two-words
+grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()' | wc -l
+
+
+1c
+https://stackoverflow.com/questions/16317961/how-to-process-each-output-line-in-a-loop
+https://linuxize.com/post/how-to-compare-strings-in-bash/
+https://stackoverflow.com/questions/1898553/return-a-regex-match-in-a-bash-script-instead-of-replacing-it
+
+1d
+https://stackoverflow.com/questions/8948975/how-do-you-do-custom-formatting-with-the-uniq-c-option
+https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines
+
+
+1e
+https://stackoverflow.com/questions/8217049/bash-associative-array-sorting-by-value
 
 ## 2. Laporan Toko ShiSop
 > Source Code 
