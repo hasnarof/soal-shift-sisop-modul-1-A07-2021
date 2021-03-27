@@ -1,22 +1,42 @@
 #!/bin/bash
-for ((h=1; h<=23; h++))
+for ((q=1; q<=23; q++))
 do
-        
-        wget -O "Koleksi_$h.jpg" https://loremflickr.com/320/240/kitten -a "Foto.log"
-        
-done
-
-for ((a=1; a<24; a++))
-do
-        for ((b=a+1; b<24; b++))
+        for ((b=1; b<q; b=b+1))
         do
-                sama=$(cmp "Koleksi_$a.jpg" "Koleksi_$b.jpg")
+                if ((q<10))
+                then
+                wget -O "Koleksi_0$q.jpg" https://loremflickr.com/320/240/kitten -a "Foto.log"
+                sama=$(cmp "Koleksi_0$q.jpg" "Koleksi_0$b.jpg")
                 akun=$?
                 #remove jika sama
                 if [ $akun == 0 ]
                 then
-                        rm Koleksi_$b.jpg
+                        rm "Koleksi_0$q.jpg"
+                        let q=$q-1
+                        
+                fi
+                else
+                wget -O "Koleksi_$q.jpg" https://loremflickr.com/320/240/kitten -a "Foto.log"
+                        if ((b<10))
+                        then
+                                sama=$(cmp "Koleksi_$q.jpg" "Koleksi_0$b.jpg"  )
+                                akun=$?
+                                #remove jika sama
+                                if [ $akun == 0 ]
+                                then
+                                rm "Koleksi_$q.jpg"
+                                let q=$q-1 
+                                fi
+                        else 
+                                sama=$(cmp "Koleksi_$q.jpg" "Koleksi_$b.jpg"  )
+                                akun=$?
+                                #remove jika sama
+                                if [ $akun == 0 ]
+                                then
+                                rm "Koleksi_$q.jpg" 
+                                let q=$q-1
+                                fi
+                        fi
                 fi
         done
-        
 done
