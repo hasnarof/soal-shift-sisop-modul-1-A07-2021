@@ -76,5 +76,5 @@ do
   printf "$i,%d,%d \n" "${infoCount[$i]}" "${errorCount[$i]}"
 done | sort
 
-# command untuk output ditaruh di file
-bash soal1.sh | tee user_statistic.csv
+# command agar output ditaruh di file csv, test.sh adalah file shell script untuk soal 1e
+bash test.sh | tee user_statistic.csv
