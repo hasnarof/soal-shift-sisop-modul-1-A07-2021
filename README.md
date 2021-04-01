@@ -6,26 +6,161 @@ Kelompok A07
 
 Sistem Operasi 2021
 
-## 1. 
-1a
-https://regexone.com/
+## 1. Pesan Error Ryujin
+Mengolah data syslog.log, contoh data adalah sebagai berikut:
 
-1b
+Jan 31 00:09:39 ubuntu.local ticky: INFO Created ticket [#4217] (mdouglas)  
+Jan 31 00:16:25 ubuntu.local ticky: INFO Closed ticket [#1754] (noel)  
+Jan 31 00:21:30 ubuntu.local ticky: ERROR The ticket was modified while updating (breee)  
+Jan 31 00:44:34 ubuntu.local ticky: ERROR Permission denied while closing ticket (ac)(rr.robinson)  
+....  
+....  
+
+### 1a) Menampilkan jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya
+````bash
+grep -o -E '(ERROR|INFO).+' syslog.log
+```` 
+#### Cara Pengerjaan
+memakai regex `'(ERROR|INFO).+'` untuk mengambil info dari data menjadi (contoh):
+ - INFO Closed ticket [#1754] (noel)
+ - ERROR The ticket was modified while updating (breee)
+ 
+ pertama dicocokkan dengan grup `ERROR` atau `INFO`, kemudian `.` adalah bebas, dan `+` untuk repetisi 1 atau lebih karakter. Opsi `-o` untuk hanya keluarkan regex yang match, `-E` untuk grep dapat memakai regex.
+#### Kendala
+awalnya kebingungan mendapatkan ide untuk bagaimana mengekstrak data selain dengan AWK.
+### 1b) Menampilkan semua pesan error yang muncul beserta jumlah kemunculannya
+
+````bash
+grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()'  | sort | uniq -c
+````
+Output:
+13 Connection to DB failed  
+     10 Permission denied while closing ticket  
+      9 The ticket was modified while updating  
+      7 Ticket doesn't exist  
+     15 Timeout while retrieving information  
+     12 Tried to add information to closed ticket  
+#### Cara Pengerjaan
+Setelah command `grep -o -E '(ERROR).+' syslog.log` untuk mengekstrak data seperti no 1a, kemudian diekstrak lagi dengan regex `'(?<=ERROR ).*(?= \()'` untuk mengekstrak data di antara `ERROR` dan karakter `\`. Kemudian `sort` berdasar pesan error, kemudian `uniq` untuk menampilkan line yang unik dan `-c` untuk menghitung line yang duplikat.
+#### Kendala
+- Awalnya kebingungan cara mengekstrak data di antara pattern tertentu.
+
 https://stackoverflow.com/questions/13242469/how-to-use-sed-grep-to-extract-text-between-two-words
-grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()' | wc -l
 
+### 1c) Menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya
+````bash
+declare -A errorCount
+declare -A infoCount
+declare -A userArray
 
-1c
+while read -r line ; do
+    if [[ "${line}" =~ \(.+\) ]]; then # mencocokkan dengan yang diawali '(' dan diakhiri ')'
+    line2=${BASH_REMATCH[0]}
+        if [[ "${line2}" =~ ([a-z]|\.)+ ]]; then # di ekstrak lagi yang di dalam '()' , mencari [a-z] dan karakter '.'
+        user=${BASH_REMATCH[0]}
+        fi
+    fi
+
+    ((userArray[$user]++)) # membuat array asosiatif dengan key = username
+
+    if [[ "${line}" =~ (ERROR|INFO) ]]; then
+        logClass=${BASH_REMATCH[0]}
+    fi
+    
+    if [[ $logClass == "ERROR" ]]; then # dicek log class nya untuk dihitung berapa error / infonya per user
+        ((errorCount[$user]++))
+    else ((infoCount[$user]++))
+    fi
+
+done < <(grep -o -E '(ERROR|INFO).+' syslog.log)
+
+for i in "${!userArray[@]}" # print 
+do
+  printf "$i INFO %d ERROR %d\n" "${infoCount[$i]}" "${errorCount[$i]}"
+done
+````
+Output:  
+mai.hendrix INFO 0 ERROR 3  
+montanap INFO 0 ERROR 4  
+jackowens INFO 2 ERROR 4  
+breee INFO 1 ERROR 5  
+....  
+....  
+#### Cara Pengerjaan
+````bash
+while  read -r line ;  do
+# KODE UNTUK MEMPROSES PER LINE
+done  <  <(grep -o -E '(ERROR|INFO).+' syslog.log)
+````
+memakai kode tersebut untuk memproses per line hasil dari command `grep -o -E '(ERROR|INFO).+' syslog.log`, kemudian memakai `=~` untuk dicocokkan dengan regex. Penjelasan regex ada di comment code. Memakai BASH_REMATCH untuk mereturn line yang cocok dengan regex. Index 0 untuk 1 line penuh, index 1 untuk column pertama (contoh: "ERROR"/"INFO"), index 2 untuk column ke dua, dst. Hingga akhirnya variabel `line2` berisi username.
+
+Kemudian penjelasan berikutnya ada di comment code.
+#### Kendala
+Awalnya kebingungan bagaimana mengekstrak data yang ingin di regex dan mengolah kemunculannya berdasar hasil ekstrakan (yaitu berdasar username). Ternyata kuncinya adalah `BASE_REMATCH`.
+
 https://stackoverflow.com/questions/16317961/how-to-process-each-output-line-in-a-loop
 https://linuxize.com/post/how-to-compare-strings-in-bash/
 https://stackoverflow.com/questions/1898553/return-a-regex-match-in-a-bash-script-instead-of-replacing-it
+### 1d) Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak
+````bash
+(printf "Error,Count\n"
+grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()' | sort | uniq -c | sort -nr | sed -e 's/^ *\([0-9]\+\) \(.\+\)/\2,\1/'
+) > error_message.csv
+````
+#### Cara Pengerjaan
+`grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()' | sort | uniq -c` sama seperti no 1b, kemudian di `sort -nr` untuk diurut berdasarkan kemuncukan terbanyak, `n` untuk sort berdasar string secara numerikal (dari kecil ke besar), `r` untuk urut reverse (sehingga dari besar ke kecil). Kemudian memakai sed untuk memformat output. `\([0-9]\+\)` untuk mendapat angka (column 1), dan `\(.\+\)` untuk mendapat column 2 (karakter `.` untuk bebas), kemudian peletakannya diformat dengan `\2,\1` (column 2, koma, kemudian column 1).
 
-1d
+Kemudian memakai `>` untuk menarut outputnya pada file error_message.csv.
+#### Kendala
+
+ - Kebingungan cara memformat, sebelum mengetahui dapat dilakukan dengan sed.
+ - Error di pattern sed.
+
 https://stackoverflow.com/questions/8948975/how-do-you-do-custom-formatting-with-the-uniq-c-option
 https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines
+### 1e) Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv dengan header Username,INFO,ERROR diurutkan berdasarkan username secara ascending.
+#### Cara Pengerjaan
+````bash
+declare -A errorCount
+declare -A infoCount
+declare -A userArray
 
+while read -r line ; do
+    if [[ "${line}" =~ \(.+\) ]]; then
+    line2=${BASH_REMATCH[0]}
+        if [[ "${line2}" =~ ([a-z]|\.)+ ]]; then
+        user=${BASH_REMATCH[0]}
+        fi
+    fi
 
-1e
+    ((userArray[$user]++))
+
+    if [[ "${line}" =~ (ERROR|INFO) ]]; then
+        logClass=${BASH_REMATCH[0]}
+    fi
+    
+    if [[ $logClass == "ERROR" ]]; then
+        ((errorCount[$user]++))
+    else ((infoCount[$user]++))
+    fi
+
+done < <(grep -o -E '(ERROR|INFO).+' syslog.log)
+
+printf "Username,INFO,ERROR\n"
+for i in "${!userArray[@]}"
+do
+  printf "$i,%d,%d \n" "${infoCount[$i]}" "${errorCount[$i]}"
+done | sort
+
+# command agar output ditaruh di file csv, test.sh adalah file shell script untuk soal 1e
+bash test.sh | tee user_statistic.csv
+````
+#### Cara Pengerjaan
+Program dari no 1c, ditambah `sort` agar terurut berdasar username (kebetulan username sudah di awal). Kemudian jalankan script dengan command `bash test.sh |  tee user_statistic.csv` pada bash. Maka hasil output akan tertulis pada user_statistic.csv .
+#### Kendala
+
+ - Awalnya tidak ada output apa-apa, command salah.
+ 
 https://stackoverflow.com/questions/8217049/bash-associative-array-sorting-by-value
 
 ## 2. Laporan Toko ShiSop
