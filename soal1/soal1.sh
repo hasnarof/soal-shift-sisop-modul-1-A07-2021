@@ -19,7 +19,7 @@ declare -A userArray
 while read -r line ; do
     if [[ "${line}" =~ \(.+\) ]]; then
     line2=${BASH_REMATCH[0]}
-        if [[ "${line2}" =~ [a-z]+ ]]; then
+        if [[ "${line2}" =~ ([a-z]|\.)+ ]]; then
         user=${BASH_REMATCH[0]}
         fi
     fi
@@ -60,7 +60,7 @@ declare -A userArray
 while read -r line ; do
     if [[ "${line}" =~ \(.+\) ]]; then
     line2=${BASH_REMATCH[0]}
-        if [[ "${line2}" =~ [a-z]+ ]]; then
+        if [[ "${line2}" =~ ([a-z]|\.)+ ]]; then
         user=${BASH_REMATCH[0]}
         fi
     fi
