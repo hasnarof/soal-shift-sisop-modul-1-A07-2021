@@ -359,10 +359,115 @@ Cara Penyelesaian : Pertama, menjalankan soal3a.sh, kemudian membuat file dengan
 Cara Penyelesaian : Menjalankan script pada jam 8:00 malam untuk tanggal tertentu setiap bulan, dengan ketentuan tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...).
 
 ### c. Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk mengunduh gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara bergantian (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, nama folder diberi awalan "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
+```#!/bin/bash
+hari=$(date +"%d-%m-%Y")
+kucing=$(ls | grep -e "Kucing.*" | wc -l)
+kelinci=$(ls | grep -e "Kelinci.*" | wc -l)
+if [[ $kucing == $kelinci ]]
+then
+mkdir "Kelinci_$hari"
+for ((q=1; q<=23; q++))
+do
+        for ((b=0; b<q; b=b+1))
+        do
+                if ((q<10))
+                then
+                wget -O "Koleksi_0$q.jpg" https://loremflickr.com/320/240/bunny -a "Foto.log"
+                sama=$(cmp "Koleksi_0$q.jpg" "Koleksi_0$b.jpg")
+                akun=$?
+                #remove jika sama
+                if [ $akun == 0 ]
+                then
+                        rm "Koleksi_0$q.jpg"
+                        let q=$q-1
 
+                fi
+                else
+                wget -O "Koleksi_$q.jpg" https://loremflickr.com/320/240/bunny -a "Foto.log"
+                        if ((b<10))
+                        then
+                        sama=$(cmp "Koleksi_$q.jpg" "Koleksi_0$b.jpg"  )
+                        akun=$?
+                        #remove jika sama
+                        if [ $akun == 0 ]
+                        then
+                        rm "Koleksi_$q.jpg"
+                        let q=$q-1 
+                        fi
+                        else 
+                        sama=$(cmp "Koleksi_$q.jpg" "Koleksi_$b.jpg"  )
+                        akun=$?
+                        #remove jika sama
+                        if [ $akun == 0 ]
+                        then
+                        rm "Koleksi_$q.jpg" 
+                        let q=$q-1
+                        fi
+                fi
+                fi
+        done
+done
+mv ./Koleksi_* ./Foto.log "./Kelinci_$hari"
+else 
+mkdir "Kucing_$hari"
+for ((q=1; q<=23; q++))
+do
+        for ((b=0; b<q; b=b+1))
+        do
+                if ((q<10))
+                then
+                wget -O "Koleksi_0$q.jpg" https://loremflickr.com/320/240/kitten -a "Foto.log"
+                sama=$(cmp "Koleksi_0$q.jpg" "Koleksi_0$b.jpg")
+                akun=$?
+                #remove jika sama
+                if [ $akun == 0 ]
+                then
+                        rm "Koleksi_0$q.jpg"
+                        let q=$q-1
+
+                fi
+                else
+                wget -O "Koleksi_$q.jpg" https://loremflickr.com/320/240/kitten -a "Foto.log"
+                        if ((b<10))
+                        then
+                        sama=$(cmp "Koleksi_$q.jpg" "Koleksi_0$b.jpg"  )
+                        akun=$?
+                        #remove jika sama
+                        if [ $akun == 0 ]
+                        then
+                        rm "Koleksi_$q.jpg"
+                        let q=$q-1 
+                        fi
+                        else 
+                        sama=$(cmp "Koleksi_$q.jpg" "Koleksi_$b.jpg"  )
+                        akun=$?
+                        #remove jika sama
+                        if [ $akun == 0 ]
+                        then
+                        rm "Koleksi_$q.jpg" 
+                        let q=$q-1
+                        fi
+                fi
+                fi
+        done
+done
+mv ./Koleksi_* ./Foto.log "./Kucing_$hari"
+fi
+```
+Penjelasan: Pertama, untuk mendownload secara bergantian menggunakan grep dan wc, dimana grep ini akan mencari untuk mencari kata atau kalimat dalam file yaitu kucing dan kelinci, dan Wc -l Menghitung jumlah line atau barisnya dalam suatu file. Untuk kondisi awal karena jumlah folder kelinci sama dengan folder kucing dan jumlahnya nol. Maka, kita dapat mendownload bebas file mana dulu, disini kita akan mendownload file kelinci terlebih dahulu, untuk cara mendownloadnya sama dengan soal 3a, kemudian hasil downloadnya dan foto lognya akan dimasukan kedalam file yang berformat Kelinci_tanggaldownload. Setelah hari berikutnya, karena kondisi jumlah file kelinci lebih besar dari jumlah kucing maka akan mendownload file kucing, kemudian hasil download dan foto lognya dimasukkan ke dalam folder dengan format Kucing_tanggaldownload. 
 ### d. Untuk mengamankan koleksi Foto dari Steven, Kuuhaku memintamu untuk membuat script yang akan memindahkan seluruh folder ke zip yang diberi nama “Koleksi.zip” dan mengunci zip tersebut dengan password berupa tanggal saat ini dengan format "MMDDYYYY" (contoh : “03032003”).
+```#!/bin/bash
 
+namafiles=$(date +"%d%m%Y")
+
+zip -P "$namafiles" -r -m Koleksi.zip ./Kucing_* ./Kelinci_*
+```
+Penjelasan : Pertama, kita membuat passwordnya terlebih berupa tanggal saat ini yaitu ```namafiles=$(date +"%d%m%Y")```. Untuk proses zip dengan password menggunakan command zip -P, maka akan terproses file zip "Koleksi.zip" dengan password yang sudah diset pada tanggal saat ini.
 ### e. Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kecuali sabtu dan minggu, dari jam 7 pagi sampai 6 sore, ia memintamu untuk membuat koleksinya ter-zip saat kuliah saja, selain dari waktu yang disebutkan, ia ingin koleksinya ter-unzip dan tidak ada file zip sama sekali.
+```0 7 * * 1-5 bash ./soal3d.sh
 
+0 18 * * 1-5 unzip -P $(date +"%d%m%Y") Koleksi.zip && rm Koleksi.zip
+```
+Penjelasan : Pada baris pertama setiap pukul 7:00 pagi, command cronnya adalah ```0 7```, untuk hari senin sampai hari jum'at commandnya adalah ```1-5```, '1' menandakan hari senin sampai '5' menandakan hari kelima yaitu jum'at. Kemudian, kita diminta untuk mengzip, kita ambil saya script dan jalankan script soal3d. Pada baris ketiga, diminta pada pukul 6 sore, maka command di cronya ```0 18```, untuk hari senin sampai hari jum'at commandnya adalah ```1-5```, '1' menandakan hari senin sampai '5' menandakan hari kelima yaitu jum'at.  Kemudian, kita diminta untuk unzip filenya, solusinya sama dengan soal 3d yaitu unzip -P artinya unzip dengan mengset passwordnya tanggal saat ini, kemudian kita dapat meremove file Koleksi.zip dengan command 'rm'  
 
 
