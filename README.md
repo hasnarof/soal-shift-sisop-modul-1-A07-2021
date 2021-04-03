@@ -170,9 +170,9 @@ https://stackoverflow.com/questions/8217049/bash-associative-array-sorting-by-va
 > Hasil Laporan 
  > **[hasil.txt](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/soal2/hasil.txt)**
  
-Dataset yang digunakan berupa file .tsv, oleh karena itu untuk pengolahan data pada soal nomor 2 dapat diselesaikan dengan menggunakan program AWK dengan field separator karakter tab ('\t').
+Dataset yang digunakan pada soal nomor 2 ini merupakan dataset penjualan TokoShiSop yang terdiri dari 21 kolom dan 9995 baris. Dataset ini berformat .tsv,  oleh karena itu untuk pengolahan data pada soal nomor 2 dapat diselesaikan dengan menggunakan program AWK dengan field separator karakter tab ('\t').
 
-a. Mencari ID transaksi terakhir yang memiliki profit percentage terbesar 
+### a. Mencari ID transaksi terakhir yang memiliki profit percentage terbesar 
 
 Profit percentage merupakan hasil pembagian dari kolom Price dengan kolom hasil pengurangan kolom Sales dan Profit.
 
@@ -197,7 +197,11 @@ END{
             yaitu %d dengan persentase %.2f%.\n\n", id, max
     }' Laporan-TokoShiSop.tsv
 ````
-b. Mencari nama kustomer yang berada di Alburquerque pada tahun 2017
+
+Berikut output dari script tersebut:
+![alt text]()
+
+### b. Mencari nama kustomer yang berada di Alburquerque pada tahun 2017
 
 Untuk menyelesaikan problem ini, digunakan metode pipe di AWK  
 
@@ -217,7 +221,7 @@ awk -F'\t' 'NR>1{
 printf "\n"
 ```
 
-c. Tipe segmen customer yang penjualannya paling sedikit dan total transaksinya.
+### c. Tipe segmen customer yang penjualannya paling sedikit dan total transaksinya.
 
 Hampir sama seperti soal sebelumnya, untuk menyelesaikan soal ini menggunakan pipe AWK
 
@@ -241,7 +245,7 @@ END{
 ```
 
 
-d. Mencari region yang memiliki profit yang paling sedikit
+### d. Mencari region yang memiliki profit yang paling sedikit
 
 Konsep soalnya hampir mirip dengan 2.c, bedanya di sini perlu menjumlahkan suatu kolom yaitu kolom profit untuk setiap region.
 
@@ -265,6 +269,13 @@ END{
 ```
 
 Untuk meng-generate output dalam format file hasil.txt maka semua script tadi digabung dan ditambahkan ```> hasil.txt``` di akhir script.
+
+Berikut merupakan hasil laporan yang sudah di-generate dalam format .txt
+![alt text](link)
+
+### Kendala
+- Saat pertama kali membuat program AWK, baris pertama yang berisi nama-nama kolom pada data masih diikutkan, setelah itu saya mencari solusi untuk mengatasinya yaitu dengan menambahkan `NR>1` di awal script.
+- Pada saat mengerjakan nomor 2b, program tidak bisa memfilter kondisi tahun 2017 dengan conditional statement seperti ini `if(tgl[3] == '17')` , akhirnya saya mengubahnya menjadi `if(tgl[3] ~ /17/)` dan program berhasil.
 
 ## 3. Soal No 3
 Kuuhaku adalah orang yang sangat suka mengoleksi foto-foto digital, namun Kuuhaku juga merupakan seorang yang pemalas sehingga ia tidak ingin repot-repot mencari foto, selain itu ia juga seorang pemalu, sehingga ia tidak ingin ada orang yang melihat koleksinya tersebut, sayangnya ia memiliki teman bernama Steven yang memiliki rasa kepo yang luar biasa. Kuuhaku pun memiliki ide agar Steven tidak bisa melihat koleksinya, serta untuk mempermudah hidupnya, yaitu dengan meminta bantuan kalian. Idenya adalah :
