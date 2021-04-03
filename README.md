@@ -199,7 +199,7 @@ END{
 ````
 
 Berikut output dari script tersebut:
-![alt text]()
+![2a](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2a%20(2).png)
 
 ### b. Mencari nama kustomer yang berada di Alburquerque pada tahun 2017
 
@@ -220,6 +220,9 @@ awk -F'\t' 'NR>1{
 
 printf "\n"
 ```
+
+Berikut output dari script tersebut:
+![2b](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2b%20(2).png)
 
 ### c. Tipe segmen customer yang penjualannya paling sedikit dan total transaksinya.
 
@@ -243,7 +246,8 @@ END{
             sedikit adalah %s %s dengan %d transaksi.\n\n", 
             segmen[1],segmen[2],segmen[3]}'
 ```
-
+Berikut output dari script tersebut:
+![2c](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2c%20(2).png)
 
 ### d. Mencari region yang memiliki profit yang paling sedikit
 
@@ -267,11 +271,15 @@ END{
          total keuntungan (profit) yang paling sedikit adalah %s 
          dengan total keuntungan %.2f.\n", region[1],region[2]}'
 ```
+Berikut output dari script tersebut:
+![2d](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2d%20(2).png)
+
+### e. Generate hasil.txt
 
 Untuk meng-generate output dalam format file hasil.txt maka semua script tadi digabung dan ditambahkan ```> hasil.txt``` di akhir script.
 
 Berikut merupakan hasil laporan yang sudah di-generate dalam format .txt
-![alt text](link)
+![hasil](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/txt%20(2).png)
 
 ### Kendala
 - Saat pertama kali membuat program AWK, baris pertama yang berisi nama-nama kolom pada data masih diikutkan, setelah itu saya mencari solusi untuk mengatasinya yaitu dengan menambahkan `NR>1` di awal script.
