@@ -354,7 +354,8 @@ echo "Alhamdulillah"
 ```
 Cara Penyelesaian : Pertama, menjalankan soal3a.sh, kemudian membuat file dengan format tanggal sekarang. Membuat filenya dengan format ```mkdir {nama file}```. Kemudian, pindah hasil download dan foto.lognya dari soal3a.sh ke dalam folder yang telah dibuat.
 ### Cron
-0 20 1-31/7,2-31/4 * * bash ./soal3b.sh
+```0 20 1-31/7,2-31/4 * * bash ./soal3b.sh
+```
 Cara Penyelesaian : Menjalankan script pada jam 8:00 malam untuk tanggal tertentu setiap bulan, dengan ketentuan tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...).
 
 ### c. Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk mengunduh gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara bergantian (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, nama folder diberi awalan "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
