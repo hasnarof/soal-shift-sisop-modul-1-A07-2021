@@ -470,4 +470,47 @@ Penjelasan : Pertama, kita membuat passwordnya terlebih berupa tanggal saat ini 
 ```
 Penjelasan : Pada baris pertama setiap pukul 7:00 pagi, command cronnya adalah ```0 7```, untuk hari senin sampai hari jum'at commandnya adalah ```1-5```, '1' menandakan hari senin sampai '5' menandakan hari kelima yaitu jum'at. Kemudian, kita diminta untuk mengzip, kita ambil saya script dan jalankan script soal3d. Pada baris ketiga, diminta pada pukul 6 sore, maka command di cronya ```0 18```, untuk hari senin sampai hari jum'at commandnya adalah ```1-5```, '1' menandakan hari senin sampai '5' menandakan hari kelima yaitu jum'at.  Kemudian, kita diminta untuk unzip filenya, solusinya sama dengan soal 3d yaitu unzip -P artinya unzip dengan mengset passwordnya tanggal saat ini, kemudian kita dapat meremove file Koleksi.zip dengan command 'rm'  
 
+Soal 3c sebelum revisi
+```#!/bin/bash
+hari=$(date +"%d-%m-%Y")
+mkdir "Kelinci_$hari"
+mkdir "Kucing_$hari"
 
+
+for ((q=1; q<=23; q++))
+do
+    if((q % 2 == 0))
+    then
+    for((b=0; b<q; b=b+2))
+    do
+        wget -O "Koleksi_$q.jpg" https://loremflickr.com/320/240/kitten -a "Foto.log"
+        mv ./Koleksi_* "./Kucing_$hari"
+        sama=$(cmp "Koleksi_$q.jpg" "Koleksi_$b.jpg")
+        akun=$?
+        #remove jika sama
+        if [ $akun == 0 ]
+        then
+                rm "Koleksi_$q.jpg"
+                let q=$q-1
+        fi
+    done
+    
+    else
+    for((b=1; b<q; b=b+2))
+    do
+        wget -O "Koleksi_$q.jpg" https://loremflickr.com/320/240/bunny -a "Foto.log"
+        mv ./Koleksi_* "./Kelinci_$hari"
+        sama=$(cmp "Koleksi_$q.jpg" "Koleksi_$b.jpg")
+        akun=$?
+        #remove jika sama
+        if [ $akun == 0 ]
+        then
+                rm "Koleksi_$q.jpg"
+                let q=$q-1
+        fi
+    done
+    
+    fi
+done
+```
+Disini kami, mengira bahwasannya yang bergantian adalah file yang akan downloadnya, sehingga pada downloadnya kita buat modulus dan membandingkannya. Kemudian files hasil download berupa kelipatan Kucing_01,Kucing_03, Kucing_05. Untuk kelinci juga demikian yaitu dengan format genap, Kelinci_02, Kelinci_04, dst. Kemudian kedua hasil download dan foto lognya dimasukkan ke dalam masing-masing file dengan format File_tanggaldownload, ex Kelinci_04-04-2021 dan Kucing_04-04-2021 
