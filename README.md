@@ -356,7 +356,7 @@ Cara Penyelesaian : Pertama, menjalankan soal3a.sh, kemudian membuat file dengan
 ### Cron
 ```0 20 1-31/7,2-31/4 * * bash ./soal3b.sh
 ```
-Cara Penyelesaian : Menjalankan script pada jam 8:00 malam untuk tanggal tertentu setiap bulan, dengan ketentuan tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...).
+Penjelasan: Menjalankan script pada jam 8:00 malam yaitu dengan commandnya ```0 20```, kemudian ketentuan tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...) yaitu ```1-31/7,2-31/4```, tanda bagi menunjukkan berapa hari sekali cron akan dijalankan dan tanda koma untuk menjalankan cron di waktu yang berbeda.
 
 ### c. Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk mengunduh gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara bergantian (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, nama folder diberi awalan "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
 ```#!/bin/bash
@@ -470,7 +470,7 @@ Penjelasan : Pertama, kita membuat passwordnya terlebih berupa tanggal saat ini 
 ```
 Penjelasan : Pada baris pertama setiap pukul 7:00 pagi, command cronnya adalah ```0 7```, untuk hari senin sampai hari jum'at commandnya adalah ```1-5```, '1' menandakan hari senin sampai '5' menandakan hari kelima yaitu jum'at. Kemudian, kita diminta untuk mengzip, kita ambil saya script dan jalankan script soal3d. Pada baris ketiga, diminta pada pukul 6 sore, maka command di cronya ```0 18```, untuk hari senin sampai hari jum'at commandnya adalah ```1-5```, '1' menandakan hari senin sampai '5' menandakan hari kelima yaitu jum'at.  Kemudian, kita diminta untuk unzip filenya, solusinya sama dengan soal 3d yaitu unzip -P artinya unzip dengan mengset passwordnya tanggal saat ini, kemudian kita dapat meremove file Koleksi.zip dengan command 'rm'  
 
-Soal 3c sebelum revisi
+### Soal 3c sebelum revisi
 ```#!/bin/bash
 hari=$(date +"%d-%m-%Y")
 mkdir "Kelinci_$hari"
