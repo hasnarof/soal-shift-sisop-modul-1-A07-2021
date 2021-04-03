@@ -285,6 +285,12 @@ Berikut merupakan hasil laporan yang sudah di-generate dalam format .txt
 - Saat pertama kali membuat program AWK, baris pertama yang berisi nama-nama kolom pada data masih diikutkan, setelah itu saya mencari solusi untuk mengatasinya yaitu dengan menambahkan `NR>1` di awal script.
 - Pada saat mengerjakan nomor 2b, program tidak bisa memfilter kondisi tahun 2017 dengan conditional statement seperti ini `if(tgl[3] == '17')` , akhirnya saya mengubahnya menjadi `if(tgl[3] ~ /17/)` dan program berhasil.
 
+### Referensi
+- https://stackoverflow.com/questions/39723726/how-to-skip-1st-line-of-file-awk
+- https://stackoverflow.com/questions/14916826/awk-unix-group-by
+- https://unix.stackexchange.com/questions/167280/awk-group-by-and-sum-column-values
+- https://stackoverflow.com/questions/17048188/how-to-use-awk-sort-by-column-3
+
 ## 3. Soal No 3
 Kuuhaku adalah orang yang sangat suka mengoleksi foto-foto digital, namun Kuuhaku juga merupakan seorang yang pemalas sehingga ia tidak ingin repot-repot mencari foto, selain itu ia juga seorang pemalu, sehingga ia tidak ingin ada orang yang melihat koleksinya tersebut, sayangnya ia memiliki teman bernama Steven yang memiliki rasa kepo yang luar biasa. Kuuhaku pun memiliki ide agar Steven tidak bisa melihat koleksinya, serta untuk mempermudah hidupnya, yaitu dengan meminta bantuan kalian. Idenya adalah :
 
