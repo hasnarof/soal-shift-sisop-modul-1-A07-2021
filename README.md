@@ -325,10 +325,29 @@ do
 done
 ```
 Cara Penyelesaian : Menggunakan metode looping ```for```  agar dapat mendownload 23 gambar. Gambar diunduh dengan perintah wget dengan nama filesnya Koleksi_* dan foto.log. Untuk mendownload gambar dengan file Koleksi_1 sampai Koleksi_9, diberi perintah if dan menggunakan perintah wget -O dengan dengan nama file Koleksi_0*. Kemudian, file  di bandingkan satu persatu apabila sama return 0, dan remove salah satu files sampai gambar ke 23.
-
 ### b. Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga meminta kalian untuk menjalankan script tersebut sehari sekali pada jam 8 malam untuk tanggal-tanggal tertentu setiap bulan, yaitu dari tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...). Supaya lebih rapi, gambar yang telah diunduh beserta log-nya, dipindahkan ke folder dengan nama tanggal unduhnya dengan format "DD-MM-YYYY" (contoh : "13-03-2023").
+### bash
+```
+#!/bin/bash
+bash ./soal3a.sh 
+
+file=$(date +%d-%m-%Y)
+mkdir "$file"
+
+mv ./Koleksi_* "./$file/"
+mv ./Foto.log "./$file/"
+echo "Alhamdulillah"
+```
+Cara Penyelesaian : Pertama, menjalankan soal3a.sh, kemudian membuat file dengan format tanggal sekarang. Membuat filenya dengan format ```mkdir {nama file}```. Kemudian, pindah hasil download dan foto.lognya dari soal3a.sh ke dalam folder yang telah dibuat.
+### Cron
+0 20 1-31/7,2-31/4 * * bash ./soal3b.sh
+Cara Penyelesaian : Menjalankan script pada jam 8:00 malam untuk tanggal tertentu setiap bulan, dengan ketentuan tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...).
+
 ### c. Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk mengunduh gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara bergantian (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, nama folder diberi awalan "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
+
 ### d. Untuk mengamankan koleksi Foto dari Steven, Kuuhaku memintamu untuk membuat script yang akan memindahkan seluruh folder ke zip yang diberi nama “Koleksi.zip” dan mengunci zip tersebut dengan password berupa tanggal saat ini dengan format "MMDDYYYY" (contoh : “03032003”).
+
 ### e. Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kecuali sabtu dan minggu, dari jam 7 pagi sampai 6 sore, ia memintamu untuk membuat koleksinya ter-zip saat kuliah saja, selain dari waktu yang disebutkan, ia ingin koleksinya ter-unzip dan tidak ada file zip sama sekali.
+
 
 
