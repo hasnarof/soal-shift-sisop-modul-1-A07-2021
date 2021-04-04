@@ -539,3 +539,9 @@ Screenshoot :
 ### Soal3d:
 ![3d](Screenshot/3d.PNG)
 ![3d](Screenshot/3d(2).PNG)
+
+### Soal3e:
+![3E](Screenshot/3E(1).PNG)
+![3E](Screenshot/3E(2).PNG)
+![3E](Screenshot/3E(3).PNG)
+![3E](Screenshot/3E(4).PNG)
