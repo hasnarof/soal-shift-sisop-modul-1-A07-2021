@@ -1,10 +1,11 @@
 # soal-shift-sisop-modul-1-A07-2021
 
-Soal Shift Modul 1
+Soal Shift Modul 1 |  Sistem Operasi 2021
 
-Kelompok A07
-
-Sistem Operasi 2021
+Kelompok A07  
+Zahra Dyah Meilani 05111940000069  
+Ghifari Astaudi' Ukumullah 05111940000012  
+Fairuz Hasna Rofifah 05111940000003  
 
 ## 1. Pesan Error Ryujin
 Mengolah data syslog.log, contoh data adalah sebagai berikut:
