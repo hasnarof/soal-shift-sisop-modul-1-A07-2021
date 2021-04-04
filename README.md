@@ -36,7 +36,7 @@ awalnya kebingungan mendapatkan ide untuk bagaimana mengekstrak data selain deng
 ````bash
 grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()'  | sort | uniq -c
 ````
-Output:
+Output:  
 13 Connection to DB failed  
      10 Permission denied while closing ticket  
       9 The ticket was modified while updating  
@@ -115,7 +115,7 @@ grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()' | sort | u
 #### Cara Pengerjaan
 `grep -o -E '(ERROR).+' syslog.log | grep -o -P '(?<=ERROR ).*(?= \()' | sort | uniq -c` sama seperti no 1b, kemudian di `sort -nr` untuk diurut berdasarkan kemuncukan terbanyak, `n` untuk sort berdasar string secara numerikal (dari kecil ke besar), `r` untuk urut reverse (sehingga dari besar ke kecil). Kemudian memakai sed untuk memformat output. `\([0-9]\+\)` untuk mendapat angka (column 1), dan `\(.\+\)` untuk mendapat column 2 (karakter `.` untuk bebas), kemudian peletakannya diformat dengan `\2,\1` (column 2, koma, kemudian column 1).
 
-Kemudian memakai `>` untuk menarut outputnya pada file error_message.csv.
+Kemudian memakai `>` untuk menaruh outputnya pada file error_message.csv.
 #### Kendala
 
  - Kebingungan cara memformat, sebelum mengetahui dapat dilakukan dengan sed.
