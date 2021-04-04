@@ -523,3 +523,8 @@ do
 done
 ```
 Disini kami, mengira bahwasannya yang bergantian adalah file yang akan downloadnya, sehingga pada downloadnya kita buat modulus dan membandingkannya. Kemudian files hasil download berupa kelipatan Kucing_01,Kucing_03, Kucing_05. Untuk kelinci juga demikian yaitu dengan format genap, Kelinci_02, Kelinci_04, dst. Kemudian kedua hasil download dan foto lognya dimasukkan ke dalam masing-masing file dengan format File_tanggaldownload, ex Kelinci_04-04-2021 dan Kucing_04-04-2021 
+
+Screenshoot :
+### Soal 3a:
+![3a](Screenshot/3a.PNG)
+![3a](Screenshot/foto.log)
