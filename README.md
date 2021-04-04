@@ -541,7 +541,9 @@ Screenshoot :
 ![3d](Screenshot/3d(2).PNG)
 
 ### Soal3e:
+### ZIP
 ![3E](Screenshot/3E(1).PNG)
 ![3E](Screenshot/3E(2).PNG)
+### UNZIP
 ![3E](Screenshot/3E(3).PNG)
 ![3E](Screenshot/3E(4).PNG)
