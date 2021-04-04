@@ -528,3 +528,14 @@ Screenshoot :
 ### Soal 3a:
 ![3a](Screenshot/3a.PNG)
 ![Foto.log](Screenshot/Foto.log)
+
+### Soal3b:
+![3b](Screenshot/3b.PNG)
+
+
+### Soal3c:
+![3c](Screenshot/3c.PNG)
+
+### Soal3d:
+![3d](Screenshot/3d.PNG)
+![3d](Screenshot/3d(2).PNG)
