@@ -281,7 +281,6 @@ END{
 ```
 
 Screenshot:
-Berikut output dari script tersebut:
 ![2d](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2d%20(2).png)
 
 ### e. Generate hasil.txt
