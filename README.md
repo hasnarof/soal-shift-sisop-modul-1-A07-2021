@@ -527,4 +527,4 @@ Disini kami, mengira bahwasannya yang bergantian adalah file yang akan downloadn
 Screenshoot :
 ### Soal 3a:
 ![3a](Screenshot/3a.PNG)
-![3a](Screenshot/foto.log)
+![Foto.log](Screenshot/Foto.log)
