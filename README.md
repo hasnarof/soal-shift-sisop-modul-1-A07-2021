@@ -205,7 +205,7 @@ END{
     }' Laporan-TokoShiSop.tsv
 ````
 
-Berikut output dari script tersebut:
+Screenshot:
 ![2a](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2a%20(2).png)
 
 ### b. Mencari nama kustomer yang berada di Alburquerque pada tahun 2017
@@ -228,7 +228,7 @@ awk -F'\t' 'NR>1{
 printf "\n"
 ```
 
-Berikut output dari script tersebut:
+Screenshot:
 ![2b](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2b%20(2).png)
 
 ### c. Tipe segmen customer yang penjualannya paling sedikit dan total transaksinya.
@@ -253,7 +253,8 @@ END{
             sedikit adalah %s %s dengan %d transaksi.\n\n", 
             segmen[1],segmen[2],segmen[3]}'
 ```
-Berikut output dari script tersebut:
+
+Screenshot:
 ![2c](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2c%20(2).png)
 
 ### d. Mencari region yang memiliki profit yang paling sedikit
@@ -278,6 +279,8 @@ END{
          total keuntungan (profit) yang paling sedikit adalah %s 
          dengan total keuntungan %.2f.\n", region[1],region[2]}'
 ```
+
+Screenshot:
 Berikut output dari script tersebut:
 ![2d](https://github.com/hasnarof/soal-shift-sisop-modul-1-A07-2021/blob/main/Screenshot/2d%20(2).png)
 
