@@ -28,6 +28,8 @@ memakai regex `'(ERROR|INFO).+'` untuk mengambil info dari data menjadi (contoh)
  pertama dicocokkan dengan grup `ERROR` atau `INFO`, kemudian `.` adalah bebas, dan `+` untuk repetisi 1 atau lebih karakter. Opsi `-o` untuk hanya keluarkan regex yang match, `-E` untuk grep dapat memakai regex.
 #### Kendala
 awalnya kebingungan mendapatkan ide untuk bagaimana mengekstrak data selain dengan AWK.
+#### Screenshot
+![1a](Screenshot/1a.png)
 ### 1b) Menampilkan semua pesan error yang muncul beserta jumlah kemunculannya
 
 ````bash
@@ -44,7 +46,8 @@ Output:
 Setelah command `grep -o -E '(ERROR).+' syslog.log` untuk mengekstrak data seperti no 1a, kemudian diekstrak lagi dengan regex `'(?<=ERROR ).*(?= \()'` untuk mengekstrak data di antara `ERROR` dan karakter `\`. Kemudian `sort` berdasar pesan error, kemudian `uniq` untuk menampilkan line yang unik dan `-c` untuk menghitung line yang duplikat.
 #### Kendala
 - Awalnya kebingungan cara mengekstrak data di antara pattern tertentu.
-
+#### Screenshot
+![1b](Screenshot/1b.png)
 https://stackoverflow.com/questions/13242469/how-to-use-sed-grep-to-extract-text-between-two-words
 
 ### 1c) Menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya
@@ -97,7 +100,8 @@ memakai kode tersebut untuk memproses per line hasil dari command `grep -o -E '(
 Kemudian penjelasan berikutnya ada di comment code.
 #### Kendala
 Awalnya kebingungan bagaimana mengekstrak data yang ingin di regex dan mengolah kemunculannya berdasar hasil ekstrakan (yaitu berdasar username). Ternyata kuncinya adalah `BASE_REMATCH`.
-
+#### Screenshot
+![1c](Screenshot/1c.png)
 https://stackoverflow.com/questions/16317961/how-to-process-each-output-line-in-a-loop
 https://linuxize.com/post/how-to-compare-strings-in-bash/
 https://stackoverflow.com/questions/1898553/return-a-regex-match-in-a-bash-script-instead-of-replacing-it
@@ -115,7 +119,8 @@ Kemudian memakai `>` untuk menarut outputnya pada file error_message.csv.
 
  - Kebingungan cara memformat, sebelum mengetahui dapat dilakukan dengan sed.
  - Error di pattern sed.
-
+#### Screenshot
+![1d](Screenshot/1d.png)
 https://stackoverflow.com/questions/8948975/how-do-you-do-custom-formatting-with-the-uniq-c-option
 https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines
 ### 1e) Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv dengan header Username,INFO,ERROR diurutkan berdasarkan username secara ascending.
@@ -160,7 +165,8 @@ Program dari no 1c, ditambah `sort` agar terurut berdasar username (kebetulan us
 #### Kendala
 
  - Awalnya tidak ada output apa-apa, command salah.
- 
+ #### Screenshot
+![1e](Screenshot/1e.png)
 https://stackoverflow.com/questions/8217049/bash-associative-array-sorting-by-value
 
 ## 2. Laporan Toko ShiSop
